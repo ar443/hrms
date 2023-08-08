@@ -1,9 +1,13 @@
 <!-- -------------- Sidebar - Author -------------- -->
 <div class="sidebar-widget author-widget">
     <div class="media">
-        <a href="/profile" class="media-left">
+        <a href="/profile" class="media-left
+        @php
+            $user = Auth::user();
+            $photo =$user ? $user->employee->photo : '';
+        @endphp">
             @if(isset(Auth::user()->employee->photo))
-                <img src="{{asset('photos/'.Auth::user()->employee->photo)}}" width="40px" height="30px" class="img-responsive">
+                <img src="{{ $photo ? asset('photos/'.$photo) :'/assets/img/avatars/profile_pic.png'}}" width="40px" height="30px" class="img-responsive">
             @else
                 <img src="/assets/img/avatars/profile_pic.png" class="img-responsive">
             @endif
