@@ -323,19 +323,19 @@
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="hidden" value="edit-emp/{{$emps->id}}" id="url">
 
-                                                <input type="file" class="gui-file" name="photo" id="photo_upload"
+                                                <input type="file" accept="image/*" class="gui-file" name="photo" id="photo_upload"
                                                        value="@if($emps && $emps->photo){{$emps->photo}}@endif"
                                                        onChange="document.getElementById('uploader1').value = this.value;">
-                                                <input type="text" class="gui-input" id="uploader1"
+                                                <input type="" accept="image/*" class="gui-input" id="uploader1"
                                                        placeholder="Select File">
                                                 <label class="field-icon">
                                                     <i class="fa fa-cloud-upload"></i>
                                                 </label>
                                             @else
                                                 <input type="hidden" value="add-employee" id="url">
-                                                <input type="file" class="gui-file" name="photo" id="photo_upload"
+                                                <input type="file" accept="image/*" class="gui-file" name="photo" id="photo_upload"
                                                        onChange="document.getElementById('uploader1').value = this.value;">
-                                                <input type="text" class="gui-input" id="uploader1"
+                                                <input type="" accept="image/*" class="gui-input" id="uploader1"
                                                        placeholder="Select File">
                                                 <label class="field-icon">
                                                     <i class="fa fa-cloud-upload"></i>
@@ -346,24 +346,24 @@
 
                                     <!-- -------------- /section -------------- -->
 
-                                    <div class="section">
+                                    {{-- <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40">Employee Code</h6></label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="text" name="emp_code" id="emp_code" class="gui-input"
-                                                       value="@if($emps && $emps->employee->code){{$emps->employee->code}}@endif" required>
+                                                       value="@if($emps && $emps->employee->code){{$emps->employee->code}}@endif" >
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-barcode"></i>
                                                 </label>
                                             @else
                                                 <input type="text" name="emp_code" id="emp_code" class="gui-input"
-                                                       placeholder="employee code..." required>
+                                                       placeholder="employee code..." >
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-barcode"></i>
                                                 </label>
                                             @endif
                                         </label>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="section">
@@ -371,13 +371,13 @@
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="text" name="emp_name" id="emp_name" class="gui-input"
-                                                       value="@if($emps && $emps->employee->name){{$emps->employee->name}}@endif" required>
+                                                       value="@if($emps && $emps->employee->name){{$emps->employee->name}}@endif" >
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-user"></i>
                                                 </label>
                                             @else
-                                                <input type="text" name="emp_name" id="emp_name" class="gui-input"
-                                                       placeholder="employee name..." required>
+                                                <input type="text" name="emp_name" id="emp_name" class="gui-input" required
+                                                       placeholder="employee name..." >
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-user"></i>
                                                 </label>
@@ -399,10 +399,10 @@
                                                        @if(isset($emps))@if($emps->employee->status == '0') checked @endif @endif>
                                                 <span class="radio"></span>Ex</label>
                                             @else
-                                                <input type="radio" name="emp_status" id="emp_status" value="1">
+                                                <input type="radio" name="emp_status" id="emp_status" value="1" checked>
                                                 <span class="radio"></span>Present</label>
                                                 <label class="field option mb5">
-                                                    <input type="radio" name="emp_status" id="emp_status" value="0" checked>
+                                                    <input type="radio" name="emp_status" id="emp_status" value="0" >
                                                     <span class="radio"></span>Ex</label>
                                             @endif
                                         </div>
@@ -492,14 +492,14 @@
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="number" name="mob_number" id="mobile_phone"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10" required
+                                                       class="gui-input phone-group" maxlength="12" minlength="10" required
                                                        value="@if($emps && $emps->employee->number){{$emps->employee->number}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
                                                 </label>
                                             @else
                                                 <input type="number" name="mob_number" id="mobile_phone"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10" required
+                                                       class="gui-input phone-group" maxlength="12" minlength="10" required
                                                        placeholder="mobile number...">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
@@ -529,14 +529,14 @@
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="number" name="emer_number" id="emergency_number"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10"
+                                                       class="gui-input phone-group" maxlength="12" minlength="10"
                                                        value="@if($emps && $emps->employee->emergency_number){{$emps->employee->emergency_number}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
                                                 </label>
                                             @else
                                                 <input type="number" name="emer_number" id="emergency_number"
-                                                       class="gui-input phone-group" maxlength="10" minlength="10"
+                                                       class="gui-input phone-group" maxlength="12" minlength="10"
                                                        placeholder="Emergency number">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
@@ -546,7 +546,7 @@
                                     </div>
 
 
-                                    <div class="section">
+                                    {{-- <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> PAN Number </h6></label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
@@ -558,7 +558,7 @@
 
                                             @endif
                                         </label>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="section">
@@ -597,7 +597,7 @@
                                     </div>
 
 
-                                    <div class="section">
+                                    {{-- <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Permanent Address </h6></label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
@@ -616,7 +616,7 @@
                                                 </label>
                                             @endif
                                         </label>
-                                    </div>
+                                    </div> --}}
                                     <!-- -------------- /section -------------- -->
                                 </section>
 
@@ -761,13 +761,13 @@
                                                 <input type="text" name="salary" id="salary" class="gui-input"
                                                        value="@if($emps && $emps->employee->salary){{$emps->employee->salary}}@endif" readonly>
                                                 <label for="input002" class="field-icon">
-                                                    <i class="fa fa-inr"></i>
+                                                    <i class="fa fa-money"></i>
                                                 </label>
                                             @else
                                                 <input type="text" placeholder="e.g 12000" name="salary"
                                                        id="salary" class="gui-input">
                                                 <label for="input002" class="field-icon">
-                                                    <i class="fa fa-inr"></i>
+                                                    <i class="fa fa-money"></i>
                                                 </label>
                                             @endif
                                         </label>
@@ -827,7 +827,7 @@
                                     </div>
 
 
-                                    <div class="section">
+                                    {{-- <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> IFSC Code </h6></label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
@@ -844,10 +844,10 @@
                                                 </label>
                                             @endif
                                         </label>
-                                    </div>
+                                    </div> --}}
 
 
-                                    <div class="section">
+                                    {{-- <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> PF Account Number </h6></label>
                                         <label for="input002" class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
@@ -866,8 +866,8 @@
                                                 </label>
                                             @endif
                                         </label>
-                                    </div>
-
+                                    </div> --}}
+{{-- 
                                    <div class="section">
                                        <label for="input002"><h6 class="mb20 mt40"> UN Number</h6></label>
                                        <label for="input002" class="field prepend-icon">
@@ -884,10 +884,10 @@
                                               </label>
                                            @endif
                                        </label>
-                                   </div>
+                                   </div> --}}
 
 
-                                    <div class="section">
+                                    {{-- <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> PF Status </h6></label>
 
                                         <div class="option-group field">
@@ -900,7 +900,7 @@
                                                        @if(isset($emps))@if($emps->employee->pf_status == '0')checked @endif @endif>
                                                 <span class="radio"></span>Inactive</label>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <!-- -------------- /section -------------- -->
 
                                 </section>

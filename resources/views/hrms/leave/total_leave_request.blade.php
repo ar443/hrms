@@ -89,7 +89,7 @@
                                     <tr class="bg-light">
                                         <th class="text-center">Id</th>
                                         <th class="text-center">Employee</th>
-                                        <th class="text-center">Code</th>
+                                        {{-- <th class="text-center">Code</th> --}}
                                         <th class="text-center">Leave Type</th>
                                         <th class="text-center">Date From</th>
                                         <th class="text-center">Date To</th>
@@ -104,7 +104,7 @@
                                         <tr>
                                             <td class="text-center">{{$i+=1}}</td>
                                             <td class="text-center">{{(isset($post))? $leave->name : $leave->user->name}}</td>
-                                            <td class="text-center">{{(isset($post))? $leave->code : $leave->user->employee->code}}</td>
+                                            {{-- <td class="text-center">{{(isset($post))? $leave->code : $leave->user->employee->code}}</td> --}}
                                             <td class="text-center">{{(isset($post))? $leave->leave_type : getLeaveType($leave->leave_type_id)}}</td>
                                             <td class="text-center">{{getFormattedDate($leave->date_from)}}</td>
                                             <td class="text-center">{{getFormattedDate($leave->date_to)}}</td>

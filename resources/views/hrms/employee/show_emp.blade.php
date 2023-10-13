@@ -81,7 +81,6 @@
                                     <thead>
                                     <tr class="bg-light">
                                         <th class="text-center">Id</th>
-                                        <th class="text-center">Code</th>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Role</th>
@@ -97,7 +96,6 @@
                                     @foreach($emps as $emp)
                                     <tr>
                                         <td class="text-center">{{$i+=1}}</td>
-                                        <td class="text-center">{{$emp->employee['code']}}</td>
                                         <td class="text-center">{{$emp->name}}</td>
                                         <td class="text-center">{{convertStatusBack($emp->employee['status'])}}</td>
                                         <td class="text-center">{{isset($emp->role->role->name)?$emp->role->role->name:''}}</td>
