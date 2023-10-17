@@ -45,7 +45,7 @@ class EmpController extends Controller
 
         $user = new User;
         $user->name = $request->emp_name;
-        $user->email = str_replace(' ', '_', $request->emp_name) . '@sipi-ip.sg';
+        $user->email = str_replace(' ', '_', $request->emp_name) . '@greelogix.com';
         $user->password = bcrypt('123456');
         $user->save();
 
@@ -55,8 +55,8 @@ class EmpController extends Controller
         $emp->code = $request->emp_code;
         $emp->status = $request->emp_status;
         $emp->gender = $request->gender;
-        $emp->date_of_birth = date_format(date_create($request->dob), 'Y-m-d');
-        $emp->date_of_joining = date_format(date_create($request->doj), 'Y-m-d');
+        $emp->date_of_birth = date_format(date_create($request->date_of_birth), 'Y-m-d');
+        $emp->date_of_joining = date_format(date_create($request->date_of_joining), 'Y-m-d');
         $emp->number = $request->number;
         $emp->qualification = $request->qualification;
         $emp->emergency_number = $request->emergency_number;
@@ -299,7 +299,7 @@ class EmpController extends Controller
                         \Log::info($row->role);
                         $user = new User;
                         $user->name = $row->emp_name;
-                        $user->email = str_replace(' ', '_', $row->emp_name) . '@sipi-ip.sg';
+                        $user->email = str_replace(' ', '_', $row->emp_name) . '@greelogix.com';
                         $user->password = bcrypt('123456');
                         $user->save();
                         $attachment = new Employee();

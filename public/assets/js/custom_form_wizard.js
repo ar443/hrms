@@ -53,7 +53,8 @@
                     qualification = $('.qualification_text').val();
                     console.log('my qualification' + qualification);
                 }
-                console.log('gender ' + gender);
+                console.log('datepicker1 ' + datepicker1);
+                console.log('datepicker4 ' + datepicker4);
                 var emergency_number = $('#emergency_number').val();
                 var pan_number = $('#pan_number').val();
                 var father_name = $('#father_name').val();
