@@ -299,7 +299,7 @@ class EmpController extends Controller
                         \Log::info($row->role);
                         $user = new User;
                         $user->name = $row->emp_name;
-                        $user->email = str_replace(' ', '_', $row->emp_name) . '@greelogix.com';
+                        $user->email = strtolower(str_replace(' ', '_', $row->emp_name)) . '@greelogix.com';
                         $user->password = bcrypt('123456');
                         $user->save();
                         $attachment = new Employee();
