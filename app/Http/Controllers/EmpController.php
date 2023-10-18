@@ -14,7 +14,9 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Exception;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EmpController extends Controller
@@ -28,69 +30,75 @@ class EmpController extends Controller
 
     public function processEmployee(Request $request)
     {
-        $filename = public_path('photos/a.png');
-        if ($request->file('photo')) {
-            $file = $request->file('photo');
-            $filename = str_random(12);
-            $fileExt = $file->getClientOriginalExtension();
-            $allowedExtension = ['jpg', 'jpeg', 'png'];
-            $destinationPath = public_path('photos');
-            if (!in_array($fileExt, $allowedExtension)) {
-                return redirect()->back()->with('message', 'Extension not allowed');
-            }
-            $filename = $filename . '.' . $fileExt;
-            $file->move($destinationPath, $filename);
+        try {
+            $filename = public_path('photos/a.png');
+            if ($request->file('photo')) {
+                $file = $request->file('photo');
+                $filename = str_random(12);
+                $fileExt = $file->getClientOriginalExtension();
+                $allowedExtension = ['jpg', 'jpeg', 'png'];
+                $destinationPath = public_path('photos');
+                if (!in_array($fileExt, $allowedExtension)) {
+                    return redirect()->back()->with('message', 'Extension not allowed');
+                }
+                $filename = $filename . '.' . $fileExt;
+                $file->move($destinationPath, $filename);
 
+            }
+
+            $user = new User;
+            $user->name = $request->emp_name;
+            $user->email = str_replace(' ', '_', $request->emp_name) . '@greelogix.com';
+            $user->password = bcrypt('123456');
+            $user->save();
+
+            $emp = new Employee;
+            $emp->photo = $filename;
+            $emp->name = $request->emp_name;
+            $emp->code = $request->emp_code;
+            $emp->status = $request->emp_status;
+            $emp->gender = $request->gender;
+            $emp->date_of_birth = date_format(date_create($request->date_of_birth), 'Y-m-d');
+            $emp->date_of_joining = date_format(date_create($request->date_of_joining), 'Y-m-d');
+            $emp->number = $request->number;
+            $emp->qualification = $request->qualification;
+            $emp->emergency_number = $request->emergency_number;
+            $emp->pan_number = $request->pan_number;
+            $emp->father_name = $request->father_name;
+            $emp->current_address = $request->current_address;
+            $emp->permanent_address = $request->permanent_address;
+            $emp->formalities = $request->formalities;
+            $emp->offer_acceptance = $request->offer_acceptance;
+            $emp->probation_period = $request->probation_period;
+            $emp->date_of_confirmation = date_format(date_create($request->date_of_confirmation), 'Y-m-d');
+            $emp->department = $request->department;
+            $emp->salary = $request->salary;
+            $emp->account_number = $request->account_number;
+            $emp->bank_name = $request->bank_name;
+            $emp->ifsc_code = $request->ifsc_code;
+            $emp->pf_account_number = $request->pf_account_number;
+            $emp->un_number = $request->un_number;
+            $emp->pf_status = $request->pf_status;
+            $emp->date_of_resignation = date_format(date_create($request->date_of_resignation), 'Y-m-d');
+            $emp->notice_period = $request->notice_period;
+            $emp->last_working_day = date_format(date_create($request->last_working_day), 'Y-m-d');
+            $emp->full_final = $request->full_final;
+            $emp->user_id = $user->id;
+            $emp->save();
+
+            $userRole = new UserRole();
+            $userRole->role_id = $request->role;
+            $userRole->user_id = $user->id;
+            $userRole->save();
+
+            //$emp->userrole()->create(['role_id' => $request->role]);
+
+            return json_encode(['title' => 'Success', 'message' => 'Employee added successfully', 'class' => 'modal-header-success']);
+        } catch (Exception $e) {
+            Log::warning($e->getMessage());
+            return json_encode(['title' => 'Warning', 'message' => 'Something went wrong', 'class' => 'modal-header-warning']);
         }
 
-        $user = new User;
-        $user->name = $request->emp_name;
-        $user->email = str_replace(' ', '_', $request->emp_name) . '@greelogix.com';
-        $user->password = bcrypt('123456');
-        $user->save();
-
-        $emp = new Employee;
-        $emp->photo = $filename;
-        $emp->name = $request->emp_name;
-        $emp->code = $request->emp_code;
-        $emp->status = $request->emp_status;
-        $emp->gender = $request->gender;
-        $emp->date_of_birth = date_format(date_create($request->date_of_birth), 'Y-m-d');
-        $emp->date_of_joining = date_format(date_create($request->date_of_joining), 'Y-m-d');
-        $emp->number = $request->number;
-        $emp->qualification = $request->qualification;
-        $emp->emergency_number = $request->emergency_number;
-        $emp->pan_number = $request->pan_number;
-        $emp->father_name = $request->father_name;
-        $emp->current_address = $request->current_address;
-        $emp->permanent_address = $request->permanent_address;
-        $emp->formalities = $request->formalities;
-        $emp->offer_acceptance = $request->offer_acceptance;
-        $emp->probation_period = $request->probation_period;
-        $emp->date_of_confirmation = date_format(date_create($request->date_of_confirmation), 'Y-m-d');
-        $emp->department = $request->department;
-        $emp->salary = $request->salary;
-        $emp->account_number = $request->account_number;
-        $emp->bank_name = $request->bank_name;
-        $emp->ifsc_code = $request->ifsc_code;
-        $emp->pf_account_number = $request->pf_account_number;
-        $emp->un_number = $request->un_number;
-        $emp->pf_status = $request->pf_status;
-        $emp->date_of_resignation = date_format(date_create($request->date_of_resignation), 'Y-m-d');
-        $emp->notice_period = $request->notice_period;
-        $emp->last_working_day = date_format(date_create($request->last_working_day), 'Y-m-d');
-        $emp->full_final = $request->full_final;
-        $emp->user_id = $user->id;
-        $emp->save();
-
-        $userRole = new UserRole();
-        $userRole->role_id = $request->role;
-        $userRole->user_id = $user->id;
-        $userRole->save();
-
-        //$emp->userrole()->create(['role_id' => $request->role]);
-
-        return json_encode(['title' => 'Success', 'message' => 'Employee added successfully', 'class' => 'modal-header-success']);
 
     }
 
