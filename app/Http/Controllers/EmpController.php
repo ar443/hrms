@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
@@ -31,6 +32,7 @@ class EmpController extends Controller
     public function processEmployee(Request $request)
     {
         try {
+            DB::beginTransaction();
             $filename = public_path('photos/a.png');
             if ($request->file('photo')) {
                 $file = $request->file('photo');
@@ -93,9 +95,12 @@ class EmpController extends Controller
 
             //$emp->userrole()->create(['role_id' => $request->role]);
 
+            DB::commit();
+
             return json_encode(['title' => 'Success', 'message' => 'Employee added successfully', 'class' => 'modal-header-success']);
         } catch (Exception $e) {
             Log::warning($e->getMessage());
+            DB::rollBack();
             return json_encode(['title' => 'Warning', 'message' => 'Something went wrong', 'class' => 'modal-header-warning']);
         }
 
@@ -104,7 +109,7 @@ class EmpController extends Controller
 
     public function showEmployee()
     {
-        $emps = User::with('employee', 'role.role')->paginate(15);
+        $emps = User::whereHas('employee')->with('employee', 'role.role')->paginate(15);
         $column = '';
         $string = '';
 
