@@ -101,7 +101,7 @@ class EmpController extends Controller
         } catch (Exception $e) {
             Log::warning($e->getMessage());
             DB::rollBack();
-            return json_encode(['title' => 'Warning', 'message' => 'Something went wrong', 'class' => 'modal-header-warning']);
+            return json_encode(['title' => 'Warning', 'message' => $e->getMessage(), 'class' => 'modal-header-warning']);
         }
 
 

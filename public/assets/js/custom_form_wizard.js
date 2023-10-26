@@ -12,7 +12,7 @@
     $(document).ready(function () {
 
         "use strict";
-
+        var isSubmitting = false;
 
         // Form Wizard
         var form = $("#custom-form-wizard");
@@ -34,10 +34,18 @@
                 return form.valid();
             },
             onFinishing: function (event, currentIndex) {
+                if (isSubmitting) {
+                    return 0; // Exit the function to prevent multiple submissions
+                }
                 form.validate().settings.ignore = ":disabled";
                 return form.valid();
             },
             onFinished: function (event, currentIndex) {
+
+                if (isSubmitting) {
+                    return 0; // Exit the function to prevent multiple submissions
+                }
+
                 event.preventDefault();
                 var emp_name = $('#emp_name').val();
                 //alert(emp_name)
@@ -121,7 +129,10 @@
                 formData.append('_token', token);
 
 
+                isSubmitting = true;
+
                 var url = $('#url').val();
+                
                 $.ajax({
                     type: 'POST',
                     url: '/' + url,
@@ -130,11 +141,19 @@
                     processData: false,
                     success: function (data) {
                         var parsed = JSON.parse(data);
-                        //alert(parsed)
+                        console.log("parsed");
                         $('#modal-header').attr('class', 'modal-header ' + parsed.class);
+                        $('.modal-title').empty();
+                        $('.modal-title').html('');;
                         $('.modal-title').append(parsed.title);
+                        $('.modal-body').empty();
+                        $('.modal-body').html('');
                         $('.modal-body').append(parsed.message);
                         $('#notification-modal').modal('show');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+
                     }
                 });
 
