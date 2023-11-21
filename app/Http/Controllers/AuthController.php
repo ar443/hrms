@@ -10,7 +10,8 @@
     use Illuminate\Http\Request;
     use Illuminate\Contracts\Mail\Mailer;
     use App\Http\Requests;
-    use Illuminate\Support\Facades\Hash;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Hash;
 
     class AuthController extends Controller
     {
@@ -57,6 +58,16 @@
         {
             $events   = $this->convertToArray(Event::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
             $meetings = $this->convertToArray(Meeting::where('date', '>', Carbon::now())->orderBy('date', 'desc')->take(3)->get());
+            $birthday = now()->format('m-d');
+            $prob = now()->subMonth('3')->addDay(1)->format('Y-m-d');
+            
+            // return $prob;
+            
+            $birthdays = Employee::whereRaw("DATE_FORMAT(date_of_birth, '%m-%d') = ?", [$birthday])->count();
+
+            $prob = Employee::whereRaw("DATE_FORMAT(date_of_joining, '%m-%d') = ?", [$prob])->count();
+            // return $prob;
+            // $probations = 
 
             return view('hrms.dashboard', compact('events', 'meetings'));
         }

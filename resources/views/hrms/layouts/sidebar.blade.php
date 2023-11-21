@@ -45,6 +45,14 @@
                         <span class="glyphicon glyphicon-tags"></span> Employee Listing </a>
                 </li>
                 <li>
+                    <a href="{{route('employee-bday')}}">
+                        <span class="glyphicon glyphicon-tags"></span> Birthdays </a>
+                </li>
+                <li>
+                    <a href="{{route('employee-pp')}}">
+                        <span class="glyphicon glyphicon-tags"></span> Probation Periods </a>
+                </li>
+                <li>
                     <a href="{{route('upload-emp')}}">
                         <span class="glyphicon glyphicon-tags"></span> Upload </a>
                 </li>

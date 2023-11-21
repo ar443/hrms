@@ -477,20 +477,9 @@
         @if(\Route::getFacadeRoot()->current()->uri() == 'dashboard' || \Route::getFacadeRoot()->current()->uri() == 'welcome' || \Route::getFacadeRoot()->current()->uri() == 'change-password' ||
         \Route::getFacadeRoot()->current()->uri() == 'not-found' )
         <!-- -------------- Page Footer -------------- -->
-        <footer id="content-footer" class="affix">
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="footer-legal">KANAK © 2016 All rights reserved. By <a
-                                href="http://www.kanakmanjari.com/" target="_blank">Kanak Manjari</a></span>
-                </div>
-                <div class="col-md-6 text-right">
-                    <span class="footer-meta"></span>
-                    <a href="#content" class="footer-return-top">
-                        <span class="fa fa-angle-up"></span>
-                    </a>
-                </div>
-            </div>
-        </footer>
+        {{-- <footer id="content-footer" class="affix">
+
+        </footer> --}}
         <!-- -------------- /Page Footer -------------- -->
         @endif
 

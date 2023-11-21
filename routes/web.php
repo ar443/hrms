@@ -56,6 +56,10 @@ Route::group(['middleware' => ['auth']], function ()
 
     Route::get('employee-manager', ['as' => 'employee-manager', 'uses' => 'EmpController@showEmployee']);
 
+    Route::get('employee-bday', ['as' => 'employee-bday', 'uses' => 'EmpController@bday']);
+
+    Route::get('employee-pp', ['as' => 'employee-pp', 'uses' => 'EmpController@pp']);
+
     Route::post('employee-manager', 'EmpController@searchEmployee');
 
     Route::get('upload-emp', ['as' => 'upload-emp', 'uses' => 'EmpController@importFile']);

@@ -637,4 +637,27 @@ class EmpController extends Controller
         return view('hrms.promotion.show_promotion', compact('promotions'));
     }
 
+    public function bday(Request $request)
+    {
+        $month = Carbon::now()->format('m');;
+        $employees = Employee::whereMonth('date_of_birth', $month)->paginate(15);
+        return view('hrms.employee.bday_emp', compact('employees'));
+
+
+        // return "Birthdays";
+    }
+    public function pp(Request $request)
+    {
+        $currentDate = now();
+
+        // Calculate the date 3 months ago from the current date
+        $threeMonthsAgo = $currentDate->subMonths(3);
+    
+        // Query employees whose joining_date is after three months ago
+        $employees = Employee::whereDate('date_of_joining', '>=', $threeMonthsAgo)->paginate(15);
+        
+        return view('hrms.employee.pp_emp', compact('employees'));
+
+    }
+
 }

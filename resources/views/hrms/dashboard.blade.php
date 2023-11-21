@@ -1,4 +1,11 @@
 @extends('hrms.layouts.base')
+@push('styles')
+    <style>
+        .upcomming {
+            background-color: rgb(62, 58, 161) !important
+        }
+    </style>
+@endpush
 
 @section('content')
 
@@ -54,6 +61,40 @@
                         <div class="panel panel-tile">
                             <div class="panel-body">
                                 <div class="row pv10">
+                                    <div class="col-xs-5 ph10">
+                                        <img src="/assets/img/pages/bday.png" class="img-responsive mauto" alt="" />
+                                    </div>
+                                    <div class="col-xs-7 pl5">
+                                        <h3 class="text-muted"><a href="{{ route('employee-bday') }}"> UPCOMING
+                                                BIRTHDAYS</a></h3>
+                                        {{-- <h2 class="fs50 mt5 mbn">385</h2> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="panel panel-tile">
+                            <div class="panel-body">
+                                <div class="row pv10">
+                                    <div class="col-xs-5 ph10">
+                                        <img src="/assets/img/pages/probation.png" class="img-responsive mauto"
+                                            alt="" />
+                                    </div>
+                                    <div class="col-xs-7 pl5">
+                                        <h3 class="text-muted"><a href="{{ route('employee-pp') }}">
+                                                PROBATIONS</a>
+                                        </h3>
+                                        {{-- <h2 class="fs50 mt5 mbn">385</h2> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="panel panel-tile">
+                            <div class="panel-body">
+                                <div class="row pv10">
                                     <div class="col-xs-5 ph10"><img src="/assets/img/pages/clipart0.png"
                                             class="img-responsive mauto" alt="" /></div>
                                     <div class="col-xs-7 pl5">
@@ -94,6 +135,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-sm-6 col-xl-3">
                         <div class="panel panel-tile">
                             <div class="panel-body">

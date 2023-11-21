@@ -50,6 +50,7 @@
                 var emp_name = $('#emp_name').val();
                 //alert(emp_name)
                 var emp_code = $('#emp_code').val();
+                var emp_email = $('#emp_email').val();
                 var emp_status = $("input[name='emp_status']:checked").val();
                 var role = $('#role').val();
                 var gender = $("input[name='gender']:checked").val();
@@ -98,6 +99,7 @@
                 }
                 formData.append('emp_name', emp_name);
                 formData.append('emp_code', emp_code);
+                formData.append('emp_email', emp_email);
                 formData.append('emp_status', emp_status);
                 formData.append('role', role);
                 formData.append('gender', gender);
@@ -150,9 +152,9 @@
                         $('.modal-body').html('');
                         $('.modal-body').append(parsed.message);
                         $('#notification-modal').modal('show');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 2000);
+                        // setTimeout(() => {
+                        //     window.location.reload();
+                        // }, 2000);
 
                     }
                 });
